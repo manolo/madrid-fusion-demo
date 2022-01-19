@@ -1,0 +1,6 @@
+[theme~="dark"] {
+  --lumo-primary-text-color: rgb(42, 239, 58);
+  --lumo-primary-color-50pct: rgba(42, 239, 58, 0.5);
+  --lumo-primary-color-10pct: rgba(42, 239, 58, 0.1);
+  --lumo-primary-color: hsl(125, 86%, 55%);
+}
