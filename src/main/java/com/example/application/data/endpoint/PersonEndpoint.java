@@ -27,5 +27,10 @@ public class PersonEndpoint {
   public List<@Nonnull Person> findAll() {
     return repo.findAll();
   }
-  
+
+  @NonNull
+  public Person save(@NonNull Person p) {
+    return repo.save(p);
+  }
+
 }

@@ -66,8 +66,11 @@ export class DemoView extends View {
     `;
   }
 
-  save() {
-    this.people = this.people.map(p => p.id === this.selected?.id ? this.binder.model.valueOf() : p);
+  async save() {
+    if (this.binder.dirty) {
+      const saved = await this.binder.submitTo(PersonEndpoint.save);
+      this.people = this.people.map(p => p.id === saved.id ? saved : p);
+    }
   }
 
   selectionChanged(e:GridActiveItemChangedEvent<Person>)  {
