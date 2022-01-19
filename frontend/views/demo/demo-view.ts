@@ -7,8 +7,10 @@ import '@vaadin/grid';
 import Person from 'Frontend/generated/com/example/application/data/entity/Person';
 import { PersonEndpoint } from 'Frontend/generated/endpoints';
 import { GridActiveItemChangedEvent } from '@vaadin/grid';
-import '@vaadin/password-field';
-import '@vaadin/button'
+import '@vaadin/email-field';
+import '@vaadin/button';
+import PersonModel from 'Frontend/generated/com/example/application/data/entity/PersonModel';
+import { Binder, field } from '@vaadin/form';
 @customElement('demo-view')
 export class DemoView extends View {
 
@@ -21,12 +23,18 @@ export class DemoView extends View {
   @state()
   selected?: Person;
 
+
+  private binder = new Binder(this, PersonModel);
+
   async connectedCallback() {
     super.connectedCallback();
     this.people = await PersonEndpoint.findAll();
   }
 
   render() {
+    const {model} = this.binder;
+
+
     return html`
       <h1>Hello ${this.name}</h1>
       <vaadin-text-field
@@ -48,9 +56,9 @@ export class DemoView extends View {
 
         <div class="grid grid-cols-2 gap-m items-baseline"
           ?hidden="${!this.selected}">
-          <vaadin-text-field label="First Name"></vaadin-text-field>
-          <vaadin-text-field label="Last Name"></vaadin-text-field>
-          <vaadin-password-field label="Password"></vaadin-password-field>
+          <vaadin-text-field label="First Name"   ${field(model.firstName)}></vaadin-text-field>
+          <vaadin-text-field label="Last Name"    ${field(model.lastName)}></vaadin-text-field>
+          <vaadin-email-field label="Password" ${field(model.email)}></vaadin-email-field>
           <vaadin-button>Save</vaadin-button>
         </div>
 
@@ -58,5 +66,6 @@ export class DemoView extends View {
   }
   selectionChanged(e:GridActiveItemChangedEvent<Person>)  {
     this.selected = e.detail.value;
+    this.selected ? this.binder.read(this.selected) : this.binder.clear();
   }
 }
