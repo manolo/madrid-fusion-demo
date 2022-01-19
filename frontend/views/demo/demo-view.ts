@@ -11,6 +11,7 @@ export class DemoView extends View {
   render() {
     return html`
       <h1>Hello ${this.name}</h1>
+      <input type="text" @input="${(e:any) => this.name = e.target.value}">
     `;
   }
 }
