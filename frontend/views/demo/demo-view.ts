@@ -27,6 +27,12 @@ export class DemoView extends View {
         @input="${(e: any) => this.name = e.target.value}"
         .value="${this.name}"
         > </vaadin-text-field>
+
+        <ul>
+          ${this.people.map(p => html`
+            <li>${p.email}</li>
+          `)}
+        </ul>
     `;
   }
 }
