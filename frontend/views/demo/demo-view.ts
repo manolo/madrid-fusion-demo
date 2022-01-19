@@ -1,11 +1,16 @@
 
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { View } from '../view';
 @customElement('demo-view')
 export class DemoView extends View {
 
+  @property()
+  name = 'World';
+
   render() {
-    return html`<h1>Hello World</h1>`;
+    return html`
+      <h1>Hello ${this.name}</h1>
+    `;
   }
 }
