@@ -2,6 +2,7 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { View } from '../view';
+import '@vaadin/text-field';
 @customElement('demo-view')
 export class DemoView extends View {
 
@@ -11,9 +12,10 @@ export class DemoView extends View {
   render() {
     return html`
       <h1>Hello ${this.name}</h1>
-      <input type="text" 
+      <vaadin-text-field
         @input="${(e: any) => this.name = e.target.value}"
-        .value="${this.name}">
+        .value="${this.name}"
+        > </vaadin-text-field>
     `;
   }
 }
