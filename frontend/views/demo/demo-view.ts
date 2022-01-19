@@ -59,11 +59,17 @@ export class DemoView extends View {
           <vaadin-text-field label="First Name"   ${field(model.firstName)}></vaadin-text-field>
           <vaadin-text-field label="Last Name"    ${field(model.lastName)}></vaadin-text-field>
           <vaadin-email-field label="Password" ${field(model.email)}></vaadin-email-field>
-          <vaadin-button>Save</vaadin-button>
+          <vaadin-email-field label="Occupation" ${field(model.occupation)}></vaadin-email-field>
+          <vaadin-button @click="${this.save}">Save</vaadin-button>
         </div>
 
     `;
   }
+
+  save() {
+    this.people = this.people.map(p => p.id === this.selected?.id ? this.binder.model.valueOf() : p);
+  }
+
   selectionChanged(e:GridActiveItemChangedEvent<Person>)  {
     this.selected = e.detail.value;
     this.selected ? this.binder.read(this.selected) : this.binder.clear();
