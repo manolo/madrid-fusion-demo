@@ -1,4 +1,5 @@
 /target/
+webpack.config.js
 .idea/
 .settings
 .project
